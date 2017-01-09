@@ -1,0 +1,24 @@
+@page {
+    margin-bottom: 5pt;
+    margin-top: 5pt
+    }
+@font-face {
+    font-family: "schreef";
+    src: url(OEBPS/wpfonts/ACaslonPro-Regular.otf)
+    }
+@font-face {
+    font-family: "schreefI";
+    src: url(OEBPS/wpfonts/ACaslonPro-Italic.otf)
+    }
+@font-face {
+    font-family: "schreefB";
+    src: url(OEBPS/wpfonts/ACaslonPro-Semibold.otf)
+    }
+@font-face {
+    font-family: "schreefBI";
+    src: url(OEBPS/wpfonts/ACaslonPro-SemiboldItalic.otf)
+    }
+@font-face {
+    font-family: "wpgSC";
+    src: url(OEBPS/wpfonts/ACaslonPro-SC.otf)
+    }

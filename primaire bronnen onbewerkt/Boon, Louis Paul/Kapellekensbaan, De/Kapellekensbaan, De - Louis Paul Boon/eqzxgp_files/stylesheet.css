@@ -1,0 +1,327 @@
+.calibre {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 0;
+    margin-left: 5pt;
+    margin-right: 5pt;
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0
+    }
+.calibre1 {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left
+    }
+.calibre2 {
+    display: block
+    }
+.calibre3 {
+    display: block;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1em
+    }
+.calibre4 {
+    display: none;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1em
+    }
+.footnote-anchor {
+    color: blue;
+    font-size: 0.75em;
+    text-decoration: underline
+    }
+.footnote-link {
+    color: blue;
+    font-size: 0.66667em;
+    text-decoration: underline
+    }
+.footnotes {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    page-break-before: always;
+    text-align: left
+    }
+.wp-blok {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 24px;
+    margin-top: 0;
+    text-align: left
+    }
+.wp-kopx {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1.83333em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 10%;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 0;
+    page-break-before: always;
+    text-align: left
+    }
+.wp-plat {
+    color: black;
+    display: block;
+    font-family: "schreef";
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left;
+    text-indent: 30px
+    }
+.wp-plat1 {
+    color: black;
+    display: block;
+    font-family: "schreef";
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left
+    }
+.wp-platmetwit {
+    color: black;
+    display: block;
+    font-family: "schreef";
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1em;
+    text-align: left
+    }
+.wp-tussenkop {
+    color: black;
+    display: block;
+    font-family: "schreefB";
+    font-size: 1.125em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 1.12em;
+    text-align: left
+    }
+.wp-voetnoten {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left;
+    text-indent: -30px
+    }
+.wp-witregel {
+    color: white;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left
+    }
+.wpo-fotolinks {
+    height: auto;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0.5em;
+    max-width: 100%;
+    padding-right: 0.1em;
+    width: auto
+    }
+.wpo-logo {
+    height: auto;
+    margin-bottom: 0;
+    margin-left: -15px;
+    margin-right: 0;
+    margin-top: 0;
+    max-width: 100%;
+    padding-right: 0.1em;
+    padding-top: 15%;
+    width: auto
+    }
+.wpt-cijfers {
+    font-family: "wpgSC";
+    line-height: 1.2
+    }
+.wpt-cijfers1 {
+    font-family: "wpgSC"
+    }
+.wpt-cursief {
+    font-family: "schreefI"
+    }
+.wpt-wit {
+    color: white
+    }
+.wpvw-auteur {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1.41667em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 0.25em;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left
+    }
+.wpvw-colofon {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 0.75em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 24px;
+    margin-top: 0;
+    text-align: left
+    }
+.wpvw-isbn {
+    color: black;
+    display: block;
+    font-family: "wpgSC";
+    font-size: 0.75em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 24px;
+    margin-top: 0;
+    text-align: left
+    }
+.wpvw-titel {
+    color: gray;
+    display: block;
+    font-family: "schreefB";
+    font-size: 2em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 0.15em;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left
+    }
+.wpvw-uitgever {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 0.2em;
+    text-align: left
+    }
+.wpvw-vermelding {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 8%;
+    margin-left: 30px;
+    margin-right: 24px;
+    margin-top: 0;
+    text-align: left
+    }
+.wpvw-vertaler {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 0.25em;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left
+    }
+.wpvw-z {
+    color: black;
+    display: block;
+    font-family: "schreef", Serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 0;
+    text-align: left
+    }
