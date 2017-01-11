@@ -1,6 +1,7 @@
 """divide the book in different corpora"""
 import filefunctions
 from bs4 import BeautifulSoup # moet hele htmltekst doorlopen en tags zoeken
+import string
 
 
 def divide_in_chapters(htmltagswithcontent): #format van htmltagswithcontent is een set
@@ -30,6 +31,81 @@ def divide_in_chapters(htmltagswithcontent): #format van htmltagswithcontent is 
     return list_of_chapters
 
 
+# functie die gaat kijken of een paragraph bij ondineke hoort
+def check_paragraph_for_ondineke(paragraph):
+    """check if paragraph belongs to ondineke.Paragraph is value in dict"""
+    all_spans_in_paragraphs = paragraph.find_all("span")
+    paragraph_is_ondineke = True
+    for span_with_content in all_spans_in_paragraphs:
+        if "wpt-cursief" not in span_with_content['class'] and "wpt-cijfers1" not in span_with_content['class']:
+           paragraph_is_ondineke = False
+
+    # soms enkele letters niet cursief omdat het hoofdletters zijn, of interpunctie niet cursief in ondineke. 
+    # hiervoor oplossing gezocht door maximum stukjes van 5 characters te laten afwijken van verplicht cursief of cijfer. 
+    if paragraph_is_ondineke == True:
+        # dit maakt een list met stukjes tekst die los in en rechtstreeks onder een paragraaf zitten
+        alltextpieces_not_in_span = paragraph.find_all(text=True, recursive=False)
+        for piece in alltextpieces_not_in_span:
+            if len(piece) > 5:
+                paragraph_is_ondineke = False
+    return paragraph_is_ondineke
+
+# functie om alle paragrafen van ondineke aan een hoofdstuk toe te voegen
+def check_chapter_for_ondineke(chapter):
+    """check if chapter belongs to ondineke. Chapter moet dict zijn met een list achter de key "paragraphs" """
+    chapter_is_ondineke = True
+
+    for paragraph in chapter["paragraphs"]:
+        paragraph_is_ondineke = check_paragraph_for_ondineke(paragraph)
+        if paragraph_is_ondineke == False:
+            chapter_is_ondineke = False
+
+    return chapter_is_ondineke        
+
+
+# functie om interpunctie te verwijderen bij een gestript woord.
+def remove_punctation(word):
+    """remove punctuation on stripped word"""
+    return_value = word.strip()
+    for punctuation in string.punctuation:
+        return_value = return_value.replace(punctuation, "")
+    return return_value
+
+
+# functie om alle paragrafen waarbij paragraph_is_reinaert True is aan een hoofdstuk toe te voegen
+def check_chapter_for_reinaert(chapter):
+    """ check if chapter ends with "johan janssens". Chapter moet dict zijn met een list als value bij de key"paragraphs" """
+    chapter_is_reinaert = False
+    last_paragraph = chapter["paragraphs"][-1]
+    last_paragraph_text = last_paragraph.get_text()
+    last_2_words = last_paragraph_text.split(" ")[-2:]
+    last_word_without_punctuation = remove_punctation(last_2_words[-1])
+    if last_2_words[0].lower() == "johan" and last_word_without_punctuation.lower() =="janssens":
+        chapter_is_reinaert = True
+
+    return chapter_is_reinaert
+
+
+# functie die list_of_chapters gaat opdelen in 4 corpora, elk corpus in een aparte list
+def divide_in_corpora(list_of_chapters):
+    """ divide a list of chapters in corpora and put each corpus in a list of chapters"""
+    # 4 corpora definieren
+    ondineke_list_of_chapters = list()
+    reinaert_list_of_chapters = list()
+    vandaag_list_of_chapters = list()
+    KB_list_of_chapters = list()
+
+
+    for chapter in list_of_chapters:
+        if check_chapter_for_ondineke(chapter) == True:
+            ondineke_list_of_chapters.append(chapter)
+        elif check_chapter_for_reinaert(chapter) == True:
+            reinaert_list_of_chapters.append(chapter) 
+        else:
+            vandaag_list_of_chapters.append(chapter)
+        KB_list_of_chapters.append(chapter)
+
+    return ondineke_list_of_chapters, reinaert_list_of_chapters, vandaag_list_of_chapters, KB_list_of_chapters # dit geeft een tuple
 
 
 # alles testen
@@ -37,9 +113,17 @@ filetext = filefunctions.read_file("primaire bronnen/corpusKB/x97890295680436.xh
 htmltagswithcontent = filefunctions.get_tags_with_specific_classnames_from_html(filetext)
 chapters = divide_in_chapters(htmltagswithcontent)
 
-# # testen hoeveel hoofdstukken er zijn
+# testen hoeveel hoofdstukken er zijn
 print(len(chapters))
 
+# testen of tekst in hoofdstukken wordt verdeeld en deze titels printen
+for chapter in chapters:
+    print(chapter["title"].get_text())
+    print(chapter["paragraphs"][0].get_text()) #hier moet een index gegeven worden want value van paragraphs is een list
+    print(check_chapter_for_ondineke(chapter)) # geeft True (indien ondineke) or False voor alle hoofdstukken
 
-
-
+ondineke_list_of_chapters, reinaert_list_of_chapters, vandaag_list_of_chapters, KB_list_of_chapters = divide_in_corpora(chapters)
+print("ondineke " + str(len(ondineke_list_of_chapters)))
+print("reinaert " + str(len(reinaert_list_of_chapters)))
+print("vandaag " + str(len(vandaag_list_of_chapters)))
+print("KB " + str(len(KB_list_of_chapters)))
