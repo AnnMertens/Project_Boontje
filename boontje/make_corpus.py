@@ -1,7 +1,7 @@
 """divide the book in different corpora"""
 import filefunctions
-from bs4 import BeautifulSoup # moet hele htmltekst doorlopen en tags zoeken
 import string
+from bs4 import BeautifulSoup # moet hele htmltekst doorlopen en tags zoeken
 
 
 def divide_in_chapters(htmltagswithcontent): #format van htmltagswithcontent is een set
@@ -31,7 +31,7 @@ def divide_in_chapters(htmltagswithcontent): #format van htmltagswithcontent is 
     return list_of_chapters
 
 
-# functie die gaat kijken of een paragraph bij ondineke hoort
+# functie maken die gaat kijken of een paragraph bij ondineke hoort
 def check_paragraph_for_ondineke(paragraph):
     """check if paragraph belongs to ondineke.Paragraph is value in dict"""
     all_spans_in_paragraphs = paragraph.find_all("span")
@@ -50,7 +50,7 @@ def check_paragraph_for_ondineke(paragraph):
                 paragraph_is_ondineke = False
     return paragraph_is_ondineke
 
-# functie om alle paragrafen van ondineke aan een hoofdstuk toe te voegen
+# functie maken om alle paragrafen van ondineke aan een hoofdstuk toe te voegen
 def check_chapter_for_ondineke(chapter):
     """check if chapter belongs to ondineke. Chapter moet dict zijn met een list achter de key "paragraphs" """
     chapter_is_ondineke = True
@@ -63,7 +63,7 @@ def check_chapter_for_ondineke(chapter):
     return chapter_is_ondineke        
 
 
-# functie om interpunctie te verwijderen bij een gestript woord.
+# functie maken om interpunctie te verwijderen bij een gestript woord.
 def remove_punctation(word):
     """remove punctuation on stripped word"""
     return_value = word.strip()
@@ -72,7 +72,7 @@ def remove_punctation(word):
     return return_value
 
 
-# functie om alle paragrafen waarbij paragraph_is_reinaert True is aan een hoofdstuk toe te voegen
+# functie maken om alle paragrafen waarbij paragraph_is_reinaert True is aan een hoofdstuk toe te voegen
 def check_chapter_for_reinaert(chapter):
     """ check if chapter ends with "johan janssens". Chapter moet dict zijn met een list als value bij de key"paragraphs" """
     chapter_is_reinaert = False
@@ -86,7 +86,7 @@ def check_chapter_for_reinaert(chapter):
     return chapter_is_reinaert
 
 
-# functie die list_of_chapters gaat opdelen in 4 corpora, elk corpus in een aparte list
+# functie maken die list_of_chapters gaat opdelen in 4 corpora, elk corpus in een aparte list
 def divide_in_corpora(list_of_chapters):
     """ divide a list of chapters in corpora and put each corpus in a list of chapters"""
     # 4 corpora definieren
@@ -113,17 +113,19 @@ filetext = filefunctions.read_file("primaire bronnen/corpusKB/x97890295680436.xh
 htmltagswithcontent = filefunctions.get_tags_with_specific_classnames_from_html(filetext)
 chapters = divide_in_chapters(htmltagswithcontent)
 
-# testen hoeveel hoofdstukken er zijn
-print(len(chapters))
+# # testen hoeveel hoofdstukken er zijn
+#print(len(chapters))
 
-# testen of tekst in hoofdstukken wordt verdeeld en deze titels printen
-for chapter in chapters:
-    print(chapter["title"].get_text())
-    print(chapter["paragraphs"][0].get_text()) #hier moet een index gegeven worden want value van paragraphs is een list
-    print(check_chapter_for_ondineke(chapter)) # geeft True (indien ondineke) or False voor alle hoofdstukken
+# # testen of tekst in hoofdstukken wordt verdeeld en deze titels printen
+#for chapter in chapters:
+    #print(chapter["title"].get_text())
+    #print(chapter["paragraphs"][0].get_text()) #hier moet een index gegeven worden want value van paragraphs is een list
+    #print(check_chapter_for_ondineke(chapter)) # geeft True (indien ondineke) or False voor alle hoofdstukken
 
 ondineke_list_of_chapters, reinaert_list_of_chapters, vandaag_list_of_chapters, KB_list_of_chapters = divide_in_corpora(chapters)
 print("ondineke " + str(len(ondineke_list_of_chapters)))
 print("reinaert " + str(len(reinaert_list_of_chapters)))
 print("vandaag " + str(len(vandaag_list_of_chapters)))
 print("KB " + str(len(KB_list_of_chapters)))
+
+

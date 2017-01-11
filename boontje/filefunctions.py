@@ -25,8 +25,8 @@ filetext = read_file("primaire bronnen/corpusKB/x97890295680436.xhtml")
 print(filetext)
 
 # testen van de functie get_tags_with_specific_classnames_from_html op tweede en derde tag
-htmltagswithcontent = get_tags_with_specific_classnames_from_html(filetext)
-print(htmltagswithcontent[1:2])
+#htmltagswithcontent = get_tags_with_specific_classnames_from_html(filetext)
+#print(htmltagswithcontent[1:2])
 #print((type)(htmltagswithcontent)) # het resultaat is een set
 
 # enkel leesbare tekst van de eerste tag via toevoeging van functie get_text() 
