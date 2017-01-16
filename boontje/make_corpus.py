@@ -69,7 +69,15 @@ def remove_punctation(word):
     return_value = word.strip()
     for punctuation in string.punctuation:
         return_value = return_value.replace(punctuation, "")
+    # volgende lijnen toegevoegd na test omwille van quotes en dergelijke bij Boon
+    if len(return_value) > 1 and return_value[0] == "‘" or len(return_value) > 1 and return_value[0] == "“":
+        return_value = return_value[1]
+    if len(return_value) > 1 and return_value[-1] == "’" or len(return_value) > 1 and return_value[-1] == "”":
+        return_value = return_value[:-1]
+    if return_value == "..." or return_value == "’" or return_value == "–" or return_value == "––" or return_value == "–––":
+        return_value = ""
     return return_value
+ 
 
 
 # functie maken om alle paragrafen waarbij paragraph_is_reinaert True is aan een hoofdstuk toe te voegen
@@ -108,10 +116,10 @@ def divide_in_corpora(list_of_chapters):
     return ondineke_list_of_chapters, reinaert_list_of_chapters, vandaag_list_of_chapters, KB_list_of_chapters # dit geeft een tuple
 
 
-# alles testen
-filetext = filefunctions.read_file("primaire bronnen/corpusKB/x97890295680436.xhtml")
-htmltagswithcontent = filefunctions.get_tags_with_specific_classnames_from_html(filetext)
-chapters = divide_in_chapters(htmltagswithcontent)
+# # alles testen
+# filetext = filefunctions.read_file("primaire bronnen/corpusKB/x97890295680436.xhtml")
+# htmltagswithcontent = filefunctions.get_tags_with_specific_classnames_from_html(filetext)
+# chapters = divide_in_chapters(htmltagswithcontent)
 
 # # testen hoeveel hoofdstukken er zijn
 #print(len(chapters))
@@ -122,10 +130,10 @@ chapters = divide_in_chapters(htmltagswithcontent)
     #print(chapter["paragraphs"][0].get_text()) #hier moet een index gegeven worden want value van paragraphs is een list
     #print(check_chapter_for_ondineke(chapter)) # geeft True (indien ondineke) or False voor alle hoofdstukken
 
-ondineke_list_of_chapters, reinaert_list_of_chapters, vandaag_list_of_chapters, KB_list_of_chapters = divide_in_corpora(chapters)
-print("ondineke " + str(len(ondineke_list_of_chapters)))
-print("reinaert " + str(len(reinaert_list_of_chapters)))
-print("vandaag " + str(len(vandaag_list_of_chapters)))
-print("KB " + str(len(KB_list_of_chapters)))
+# ondineke_list_of_chapters, reinaert_list_of_chapters, vandaag_list_of_chapters, KB_list_of_chapters = divide_in_corpora(chapters)
+# print("ondineke " + str(len(ondineke_list_of_chapters)))
+# print("reinaert " + str(len(reinaert_list_of_chapters)))
+# print("vandaag " + str(len(vandaag_list_of_chapters)))
+# print("KB " + str(len(KB_list_of_chapters)))
 
 
