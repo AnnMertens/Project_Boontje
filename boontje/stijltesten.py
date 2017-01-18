@@ -9,11 +9,11 @@ import htmltags_to_corpus
 import re
 
 
-ondineke_sentences, reinaert_sentences, vandaag_sentences, KB_sentences = htmltags_to_corpus.get_sentences_from_corpora()
-wordlist_ondineke = wordlist_of_corpus.make_list_in_lower_without_punctuation_from_corpus(ondineke_sentences)
-wordlist_reinaert = wordlist_of_corpus.make_list_in_lower_without_punctuation_from_corpus(reinaert_sentences)
-wordlist_vandaag = wordlist_of_corpus.make_list_in_lower_without_punctuation_from_corpus(vandaag_sentences)
-wordlist_KB = wordlist_of_corpus.make_list_in_lower_without_punctuation_from_corpus(KB_sentences)
+ondineke_sentences, reinaert_sentences, vandaag_sentences, KB_sentences = htmltags_to_corpus.get_sentences_from_corpora_kapellekensbaan()
+wordlist_ondineke = wordlist_of_corpus.make_list_in_lower_words_from_corpus(ondineke_sentences)
+wordlist_reinaert = wordlist_of_corpus.make_list_in_lower_words_from_corpus(reinaert_sentences)
+wordlist_vandaag = wordlist_of_corpus.make_list_in_lower_words_from_corpus(vandaag_sentences)
+wordlist_KB = wordlist_of_corpus.make_list_in_lower_words_from_corpus(KB_sentences)
 fdist_ondineke = FreqDist(wordlist_ondineke)
 fdist_reinaert = FreqDist(wordlist_reinaert)
 fdist_vandaag = FreqDist(wordlist_vandaag)
@@ -138,23 +138,49 @@ def count_sentence_with_number_of_token(token, corpus):
 
 
 # functie die participia_praesentis gaat tellen
-# zich programmatorisch wel goed, maar taalkundig nog niet. Tagging kan helpen. Nog uitzoeken indien tijd.
-# fouten : zo neemt hij ook woorden als uitstekend, vanzelfsprekend of volgende
-# fouten : en ook werkwoorden zoals zoende en weende
+# zich programmatorisch wel goed, maar taalkundig nog niet.
+# fouten : zo neemt hij ook woorden als uitstekend, vanzelfsprekend of volgende. verholpen via tagging
+# fouten : en ook werkwoorden zoals zoende en weende.Opgelost door te controleren dat pp volgt op verb of none
 def participia_praesentis(corpus):
     """counts the number of participia praesentis in a corpus """
     counter_participia_praesentis = 0
-    for sentence in ondineke_sentences:
-        for word in sentence["words"]:
-            if len(word) > 3 and word[-3:] == "end":
+
+    for sentence in corpus:
+        participia_praesentis_found = False
+        previous_word_is_verb_or_none = False
+        previous_word =""
+        for word, tag in sentence["tagged_alpino_words"]:
+            if previous_word_is_verb_or_none and len(word) > 3 and word[-3:] == "end":
                 counter_participia_praesentis += 1
-            if len(word) > 5 and word[-4:] == "ende":
+                # print(previous_word + " - " + word)
+                # print("---------")
+                previous_word_is_verb_or_none = True
+            if previous_word_is_verb_or_none and len(word) > 5 and word[-4:] == "ende":
                 counter_participia_praesentis += 1
+                # print(previous_word + " - " + word)
+                # print("---------")
+                previous_word_is_verb_or_none = True
+            if tag == "verb" or tag == None:
+                previous_word_is_verb_or_none = True
+                previous_word = word
+            else:
+                previous_word_is_verb_or_none = False
 
     return counter_participia_praesentis
 
-# # testen
-#print(participia_praesentis(ondineke_sentences))
+# testen
+# print(participia_praesentis(KB_sentences))
+
+# list_of_sentences_with_hebbende = list()
+# for sentence in KB_sentences:
+#     if "hebbende" in sentence["words"]:
+#         list_of_sentences_with_hebbende.append(sentence)
+
+# print(participia_praesentis(list_of_sentences_with_hebbende))
+
+
+
+
 
 
 # functie die telt hoe vaak een bepaald werkwoord als hulpwerkwoord wordt gebruikt in een corpus
@@ -168,9 +194,9 @@ def auxiliary_verb(verb, corpus):
         previous_word = ""
         for word in sentence["words"]:    
             if previous_word_is_verb == True and (word[-2:] == "en" or word == "te" or word == "gaan" or word == "staan" or word == "slaan" or word == "zijn"):
-                print("------------------")
-                print(previous_word + ' - ' + word)
-                print(sentence["sentence"])
+                #print("------------------")
+                #print(previous_word + ' - ' + word)
+                #print(sentence["sentence"])
                 auxiliary_verb_found = True
                 if auxiliary_verb_found == True:
                     counter_auxiliary_verb += 1
@@ -282,9 +308,9 @@ def use_of_capital(wordlist):
             counter_capital += 1
     return counter_capital
 
-# # testen
-# list_ondineke_nopunct = wordlist_of_corpus.make_list_without_punctuation_from_corpus(ondineke_sentences)
-# print(use_of_capital(list_ondineke_nopunct))
+# testen
+#list_ondineke_nopunct = wordlist_of_corpus.make_list_without_punctuation_from_corpus(ondineke_sentences)
+#print(use_of_capital(list_ondineke_nopunct))
 # testlist = ["AAn", "aAAn","aAN","qsmdfljqs","AAN", "AAAAnnn","aaaaNNN", "aAAAAAn"]
 # print(use_of_capital(testlist))
 
