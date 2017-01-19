@@ -66,19 +66,19 @@ def alliteration(char_num, corpus):
 
     return counter_alliteration
 
-
-print("222222222222")
-print(alliteration(2, KB_sentences))
-print(alliteration(2, walschap_sentences))
-print("333333333333")
-print(alliteration(3, KB_sentences))
-print(alliteration(3, walschap_sentences))
-print("4444444444444")
-print(alliteration(4, KB_sentences))
-print(alliteration(4, walschap_sentences))
-print("555555555")
-print(alliteration(5, KB_sentences))
-print(alliteration(5, walschap_sentences))
+# # testen
+# print("222222222222")
+# print(alliteration(2, KB_sentences))
+# print(alliteration(2, walschap_sentences))
+# print("333333333333")
+# print(alliteration(3, KB_sentences))
+# print(alliteration(3, walschap_sentences))
+# print("4444444444444")
+# print(alliteration(4, KB_sentences))
+# print(alliteration(4, walschap_sentences))
+# print("555555555")
+# print(alliteration(5, KB_sentences))
+# print(alliteration(5, walschap_sentences))
 
 
 
