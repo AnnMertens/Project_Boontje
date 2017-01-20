@@ -1,3 +1,4 @@
+""" eerste deel stijltesten"""
 from nltk import FreqDist
 import nltk.data
 import make_corpus
@@ -9,15 +10,15 @@ import htmltags_to_corpus
 import re
 
 
-ondineke_sentences, reinaert_sentences, vandaag_sentences, KB_sentences = htmltags_to_corpus.get_sentences_from_corpora_kapellekensbaan()
-wordlist_ondineke = wordlist_of_corpus.make_list_in_lower_words_from_corpus(ondineke_sentences)
-wordlist_reinaert = wordlist_of_corpus.make_list_in_lower_words_from_corpus(reinaert_sentences)
-wordlist_vandaag = wordlist_of_corpus.make_list_in_lower_words_from_corpus(vandaag_sentences)
-wordlist_KB = wordlist_of_corpus.make_list_in_lower_words_from_corpus(KB_sentences)
-fdist_ondineke = FreqDist(wordlist_ondineke)
-fdist_reinaert = FreqDist(wordlist_reinaert)
-fdist_vandaag = FreqDist(wordlist_vandaag)
-fdist_KB = FreqDist(wordlist_KB)
+# ondineke_sentences, reinaert_sentences, vandaag_sentences, KB_sentences = htmltags_to_corpus.get_sentences_from_corpora_kapellekensbaan()
+# wordlist_ondineke = wordlist_of_corpus.make_list_in_lower_words_from_corpus(ondineke_sentences)
+# wordlist_reinaert = wordlist_of_corpus.make_list_in_lower_words_from_corpus(reinaert_sentences)
+# wordlist_vandaag = wordlist_of_corpus.make_list_of_words_from_corpus(vandaag_sentences)
+# wordlist_KB = wordlist_of_corpus.make_list_of_words_from_corpus(KB_sentences)
+# fdist_ondineke = FreqDist(wordlist_ondineke)
+# fdist_reinaert = FreqDist(wordlist_reinaert)
+# fdist_vandaag = FreqDist(wordlist_vandaag)
+# fdist_KB = FreqDist(wordlist_KB)
 
 
 # functie die kijkt of specifiek woord in zin van corpus staat en zinnen met/zonder telt
@@ -136,7 +137,7 @@ def auxiliary_verb(verb, corpus):
 
 # functie die telt hoe vaak een lijst van werkwoorden als hulpwerkwoord wordt gebruikt in een corpus
 # functie om gebruik van "gaan" of "moeten en de vervoegingen daarvan als hulpwerkwoord te tellen
-# functie werkt maar geeft niet het gewenste resultaat owv semantiek: ook veel gebruik van moeten in "normale" betekenis.
+# functie werkt maar geeft niet voor elke lijst gewenste resultaat owv semantiek: ook veel gebruik van moeten in "normale" betekenis.
 def auxiliary_verb_conj(list_of_verbs, corpus):
     """ count specific conjugated verbs in a list used as auxiliary verb in corpus"""
     counter_auxiliary_verb_conj = 0
@@ -251,3 +252,5 @@ def use_of_capital(wordlist):
 # # testen
 # testlist = ["AAn", "aAAn","aAN","qsmdfljqs","AAN", "AAAAnnn","aaaaNNN", "aAAAAAn"]
 # print(use_of_capital(testlist))
+# print(use_of_capital(wordlist_KB))
+

@@ -1,12 +1,49 @@
+""" functies om rijm te testen. Enkel beginrijm overgehouden"""
 import nltk
 from filefunctions import read_file
 import htmltags_to_corpus
 
-ondineke_sentences, reinaert_sentences, vandaag_sentences, KB_sentences = htmltags_to_corpus.get_sentences_from_corpora_kapellekensbaan()
-walschap_sentences = htmltags_to_corpus.get_sentences_from_corpus_walschap()
-hvvb_sentences = htmltags_to_corpus.get_sentences_from_corpus_het_verdriet_van_belgie()
+# ondineke_sentences, reinaert_sentences, vandaag_sentences, KB_sentences = htmltags_to_corpus.get_sentences_from_corpora_kapellekensbaan()
+# walschap_sentences = htmltags_to_corpus.get_sentences_from_corpus_walschap()
+# hvvb_sentences = htmltags_to_corpus.get_sentences_from_corpus_het_verdriet_van_belgie()
 
-# functie nog uit te werken of weg te smijten
+# functie die eerste x characters van opeenvolgende woorden gaat controleren
+def alliteration(char_num, corpus):
+    """counts the number of alliterations with x characters in a corpus """
+    counter_alliteration = 0
+
+    for sentence in corpus:
+        alliteration_found = False
+        previous_word = False
+        previous_word =""
+
+        for word in sentence["words"]:
+            if previous_word[:char_num] == word[:char_num]:
+                counter_alliteration += 1
+                previous_word = True
+                previous_word = word
+            else:
+                previous_word = True
+                previous_word = word
+
+    return counter_alliteration
+
+# # testen
+# print("222222222222")
+# print(alliteration(2, KB_sentences))
+# print(alliteration(2, walschap_sentences))
+# print("333333333333")
+# print(alliteration(3, KB_sentences))
+# print(alliteration(3, walschap_sentences))
+# print("4444444444444")
+# print(alliteration(4, KB_sentences))
+# print(alliteration(4, walschap_sentences))
+# print("555555555")
+# print(alliteration(5, KB_sentences))
+# print(alliteration(5, walschap_sentences))
+
+
+# functie eventueel later nog uit te werken voor thesis. Werkt nog niet.
 # def read_syllables_corpus(filename):
 #     file_text = read_file(filename)
 #     return_list = list()
@@ -43,42 +80,7 @@ hvvb_sentences = htmltags_to_corpus.get_sentences_from_corpus_het_verdriet_van_b
     #print(dict_item)
 
 
-# functie die eerste x characters van opeenvolgende woorden gaat controleren
-def alliteration(char_num, corpus):
-    """counts the number of alliterations with x characters in a corpus """
-    counter_alliteration = 0
 
-    for sentence in corpus:
-        alliteration_found = False
-        previous_word = False
-        previous_word =""
-
-        for word in sentence["words"]:
-            if previous_word[:char_num] == word[:char_num]:
-                counter_alliteration += 1
-                # print(previous_word + " - " + word)
-                # print("---------")
-                previous_word = True
-                previous_word = word
-            else:
-                previous_word = True
-                previous_word = word
-
-    return counter_alliteration
-
-# # testen
-# print("222222222222")
-# print(alliteration(2, KB_sentences))
-# print(alliteration(2, walschap_sentences))
-# print("333333333333")
-# print(alliteration(3, KB_sentences))
-# print(alliteration(3, walschap_sentences))
-# print("4444444444444")
-# print(alliteration(4, KB_sentences))
-# print(alliteration(4, walschap_sentences))
-# print("555555555")
-# print(alliteration(5, KB_sentences))
-# print(alliteration(5, walschap_sentences))
 
 
 

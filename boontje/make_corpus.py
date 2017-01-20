@@ -1,23 +1,22 @@
-"""divide the book in different corpora"""
+"""verdeling van De Kapellekensbaan in 3 corpora + 1 volledig corpus"""
 import filefunctions
 import string
 from bs4 import BeautifulSoup # moet hele htmltekst doorlopen en tags zoeken
 
-
+# functie die list of dicts gaat maken, elk hoofdstuk is een aparte dict
 def divide_in_chapters(htmltagswithcontent): #format van htmltagswithcontent is een set
     """divide book in chapters"""
     # maak een list waarin alle hoofdstukken zullen komen
-    # elk hoofdstuk wordt een aparte dict 
-    # het resultaat is dus een list of dict
+    # elk hoofdstuk wordt een aparte dict
+    # het resultaat is dus een list of dicts
     list_of_chapters = list()
     last_dict = dict()
-    
     # veiligheidsparagraphslist toevoegen om geen problemen te krijgen met files die niet zouden beginnen met een tussenkop
     last_dict["paragraphs"] = list()
 
     # tags allemaal doorlopen
     for tagwithcontent in htmltagswithcontent:
-        # zoeken op klasse wp-tussenkop in de list met klassenamen van tagwithcontent 
+        # zoeken op klasse wp-tussenkop in de list met klassenamen van tagwithcontent
         if "wp-tussenkop" in tagwithcontent['class']:
             # dan een nieuwe dict maken in de list met naam list_of_chapters
             list_of_chapters.append(dict())
@@ -28,21 +27,23 @@ def divide_in_chapters(htmltagswithcontent): #format van htmltagswithcontent is 
             last_dict["paragraphs"] = list()
         else:
             last_dict["paragraphs"].append(tagwithcontent)
+
     return list_of_chapters
 
 
-# functie maken die gaat kijken of een paragraph bij ondineke hoort
+# functie die gaat kijken of een paragraph bij ondineke hoort
 def check_paragraph_for_ondineke(paragraph):
     """check if paragraph belongs to ondineke.Paragraph is value in dict"""
     all_spans_in_paragraphs = paragraph.find_all("span")
     paragraph_is_ondineke = True
+
     for span_with_content in all_spans_in_paragraphs:
         if "wpt-cursief" not in span_with_content['class'] and "wpt-cijfers1" not in span_with_content['class']:
            paragraph_is_ondineke = False
 
     # soms enkele letters niet cursief omdat het hoofdletters zijn, of interpunctie niet cursief in ondineke. 
     # hiervoor oplossing gezocht door maximum stukjes van 5 characters te laten afwijken van verplicht cursief of cijfer. 
-    if paragraph_is_ondineke == True:
+    if paragraph_is_ondineke is True:
         # dit maakt een list met stukjes tekst die los in en rechtstreeks onder een paragraaf zitten
         alltextpieces_not_in_span = paragraph.find_all(text=True, recursive=False)
         for piece in alltextpieces_not_in_span:
@@ -50,23 +51,24 @@ def check_paragraph_for_ondineke(paragraph):
                 paragraph_is_ondineke = False
     return paragraph_is_ondineke
 
-# functie maken om alle paragrafen van ondineke aan een hoofdstuk toe te voegen
+# functie om alle paragrafen van ondineke aan een hoofdstuk toe te voegen
 def check_chapter_for_ondineke(chapter):
-    """check if chapter belongs to ondineke. Chapter moet dict zijn met een list achter de key "paragraphs" """
+    """check if chapter belongs to ondineke """
     chapter_is_ondineke = True
 
     for paragraph in chapter["paragraphs"]:
         paragraph_is_ondineke = check_paragraph_for_ondineke(paragraph)
-        if paragraph_is_ondineke == False:
+        if paragraph_is_ondineke is False:
             chapter_is_ondineke = False
 
-    return chapter_is_ondineke        
+    return chapter_is_ondineke
 
 
-# functie maken om interpunctie te verwijderen bij een gestript woord.
+# functie om interpunctie te verwijderen bij een gestript woord
 def remove_punctation(word):
     """remove punctuation on stripped word"""
     return_value = word.strip()
+
     for punctuation in string.punctuation:
         return_value = return_value.replace(punctuation, "")
     # volgende lijnen toegevoegd na test omwille van quotes en dergelijke bij Boon
@@ -76,25 +78,26 @@ def remove_punctation(word):
         return_value = return_value[:-1]
     if return_value == "..." or return_value == "’" or return_value == "–" or return_value == "––" or return_value == "–––":
         return_value = ""
+
     return return_value
  
 
-
-# functie maken om alle paragrafen waarbij paragraph_is_reinaert True is aan een hoofdstuk toe te voegen
+# functie om alle paragrafen waarbij paragraph_is_reinaert True is aan een hoofdstuk toe te voegen
 def check_chapter_for_reinaert(chapter):
-    """ check if chapter ends with "johan janssens". Chapter moet dict zijn met een list als value bij de key"paragraphs" """
+    """ check if chapter ends with "johan janssens" """
     chapter_is_reinaert = False
     last_paragraph = chapter["paragraphs"][-1]
     last_paragraph_text = last_paragraph.get_text()
     last_2_words = last_paragraph_text.split(" ")[-2:]
     last_word_without_punctuation = remove_punctation(last_2_words[-1])
-    if last_2_words[0].lower() == "johan" and last_word_without_punctuation.lower() =="janssens":
+
+    if last_2_words[0].lower() == "johan" and last_word_without_punctuation.lower() == "janssens":
         chapter_is_reinaert = True
 
     return chapter_is_reinaert
 
 
-# functie maken die list_of_chapters gaat opdelen in 4 corpora, elk corpus in een aparte list
+# functie die list_of_chapters gaat opdelen in 4 corpora, elk corpus in een aparte list
 def divide_in_corpora(list_of_chapters):
     """ divide a list of chapters in corpora and put each corpus in a list of chapters"""
     # 4 corpora definieren
@@ -103,12 +106,11 @@ def divide_in_corpora(list_of_chapters):
     vandaag_list_of_chapters = list()
     KB_list_of_chapters = list()
 
-
     for chapter in list_of_chapters:
-        if check_chapter_for_ondineke(chapter) == True:
+        if check_chapter_for_ondineke(chapter) is True:
             ondineke_list_of_chapters.append(chapter)
-        elif check_chapter_for_reinaert(chapter) == True:
-            reinaert_list_of_chapters.append(chapter) 
+        elif check_chapter_for_reinaert(chapter) is True:
+            reinaert_list_of_chapters.append(chapter)
         else:
             vandaag_list_of_chapters.append(chapter)
         KB_list_of_chapters.append(chapter)
