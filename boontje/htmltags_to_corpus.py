@@ -75,7 +75,6 @@ def sentence_to_dict(text_only_sentence):
     """ make a dict with 
     key "sentence", value the text_only_sentence and
     key "words", value list of words and 
-    key "tagged_conll_words", value list of sets(word, conll_tag) and
     key "tagged_alpino_words", value list of sets (word, alpino_tag)
      of that text_only_sentence"""
     result = dict()

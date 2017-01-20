@@ -48,7 +48,7 @@ het_verdriet_van_belgie_sentences = get_sentences_from_corpus_het_verdriet_van_b
 database, sectoken = create_connection()
 
 # Verwijder alles uit de database dat als hoofdelement de naam van het corpus bevat.
-# (om ervoor te zorgen dat het corpus geen tweede keer in de database wordt gestoken)
+# (om ervoor te zorgen dat weggesschreven resultaat niet onnodig blijven staan.)
 database.child("HVVB").remove(sectoken)
 database.child("KB").remove(sectoken)
 database.child("Ondineke").remove(sectoken)

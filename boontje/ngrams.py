@@ -145,13 +145,13 @@ def get_longer_bigrams_with_noun_adj_with_frequency(corpus):
 # print(get_longer_trigrams_with_noun_adj_with_frequency(KB_sentences))
 
 
-test = [("ik","bla"), ("ben","jk"), ("rijk","ek")]
-def get_bigrams_with_frequency(wordlist):
-    bigram_measures = nltk.collocations.BigramAssocMeasures()
-    finder = BigramCollocationFinder.from_words(wordlist)
-    scored = finder.score_ngrams(bigram_measures.raw_freq)
+#test = [("ik","bla"), ("ben","jk"), ("rijk","ek")]
+#def get_bigrams_with_frequency(wordlist):
+    #bigram_measures = nltk.collocations.BigramAssocMeasures()
+    #finder = BigramCollocationFinder.from_words(wordlist)
+    #scored = finder.score_ngrams(bigram_measures.raw_freq)
 
-    return scored
+    #return scored
 
 # print(get_bigrams_with_frequency(test))
 
