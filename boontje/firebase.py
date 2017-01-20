@@ -144,4 +144,4 @@ execute_all_tests_and_store_results("Walschap", walschap_sentences, database, se
 
 # toegang tot project in mijn firebase gegeven aan volgende adressen :
 # mike.kestemont@gmail.com
-# walter.daelemans@uantwerpen.com
+# walter.daelemans@gmail.com
